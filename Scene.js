@@ -29,7 +29,7 @@ class Scene{
 		this.state.tiles.select(Math.floor(x/Constants.TILE_SIZE),Math.floor(y/Constants.TILE_SIZE));
 	}
 	update(){
-
+		this.state.turn++;
 	}
 	render(){
 		const {canvas, ctx, state} = this;

@@ -12,7 +12,7 @@ class Tile{
 		//check type to get color
 		if(this.type === TileType.FUEL) return 'gray';
 		else if(this.type === TileType.WEAPON) return 'red';
-		else if(this.type === TileType.ENERGY) return 'blue';
+		else if(this.type === TileType.ENERGY) return '#99ccff';
 		else return 'white';
 	}
 	select(){
@@ -22,12 +22,11 @@ class Tile{
 		this.selected = false;
 	}
 	render(ctx,xOffset,yOffset){
+		if(this.building && this.building instanceof Tube) return;
 		ctx.fillStyle = this.getColor();
 		ctx.fillRect(xOffset+(this.x*this.size),yOffset+(this.y*this.size),this.size,this.size);
 		ctx.strokeStyle = 'black';
 		ctx.lineWidth = 1;
 		ctx.strokeRect(xOffset+(this.x*this.size),yOffset+(this.y*this.size),this.size,this.size);
-		if(this.building)
-			this.building.render(ctx,xOffset,yOffser);
 	}
 }
