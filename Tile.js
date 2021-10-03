@@ -4,13 +4,16 @@ class Tile{
 		this.y = y;
 		this.size = size;
 		this.building = null;
-		this.type = 0;
+		this.type = TileType.NONE;
 		this.selected = false;
 	}
 	getColor(){
-		if(this.selected) return 'blue';
+		if(this.selected) return 'green';
 		//check type to get color
-		return 'white';
+		if(this.type === TileType.FUEL) return 'gray';
+		else if(this.type === TileType.WEAPON) return 'red';
+		else if(this.type === TileType.ENERGY) return 'blue';
+		else return 'white';
 	}
 	select(){
 		this.selected = true;
