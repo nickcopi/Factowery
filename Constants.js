@@ -12,6 +12,6 @@ Constants.TILE_TYPE_COLOR[TileType.SCRAP] = '#964B00';
 
 Constants.TILE_TYPE_NAME[TileType.NONE] = 'None';
 Constants.TILE_TYPE_NAME[TileType.FUEL] = 'Fuel Source';
-Constants.TILE_TYPE_NAME[TileType.WEAPON] = 'Weapon Source';
+Constants.TILE_TYPE_NAME[TileType.WEAPON] = 'Ammo Source';
 Constants.TILE_TYPE_NAME[TileType.ENERGY] = 'Energy Source';
 Constants.TILE_TYPE_NAME[TileType.SCRAP] = 'Junk Scrap Source';

@@ -2,10 +2,12 @@ class Scene{
 	static WIDTH = 1280;
 	static HEIGHT = 700;
 	constructor(canvas){
+		this.width = Scene.WIDTH;
+		this.height = Scene.HEIGHT;
 		this.initCanvas(canvas);
-		this.state = new GameState();
+		this.state = new GameState(this.width,this.height-100);
 		this.selection = {updated:true};
-		this.bottomBar = new BottomBar(1280,100,this.selection,canvas,this.state.tiles,this.state.wallet);
+		this.bottomBar = new BottomBar(this.width,100,this.selection,canvas,this.state.tiles,this.state.wallet);
 		this.interval = setInterval(()=>{
 			this.update();
 			this.render();
@@ -36,6 +38,7 @@ class Scene{
 			building.use(this.state.turn,this.state.tiles,this.state.wallet);
 			return true;
 		});
+		this.state.enemyManager.update(this.state.turns);
 	}
 	render(){
 		const {canvas, ctx, state} = this;
@@ -43,6 +46,7 @@ class Scene{
 		ctx.fillStyle='green';
 		ctx.fillRect(Constants.GRID_SIZE,0,canvas.width-Constants.GRID_SIZE,canvas.height-100);
 		state.tiles.render(ctx);
+		state.enemyManager.render(ctx);
 		if(this.selection.tile){
 			let x = this.selection.tile.x*this.selection.tile.size;
 			let y = this.selection.tile.y*this.selection.tile.size;
@@ -55,6 +59,6 @@ class Scene{
 			this.bottomBar.render(ctx,0,canvas.height-100);
 			this.selection.updated = false;
 		}
-		this.bottomBar.renderRight(ctx,canvas.width-200,canvas.height-100,state.lives);
+		this.bottomBar.renderRight(ctx,canvas.width-200,canvas.height-100,state.lives.lives);
 	}
 }
