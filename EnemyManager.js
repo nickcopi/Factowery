@@ -13,8 +13,19 @@ class EnemyManager{
 				return false;
 			}
 			return true;
-
 		});
+		let rate = 300;
+		if(turns > 10000)
+			rate = 200;
+		if(turns > 20000)
+			rate = 100;
+		if(turns > 30000)
+			rate = 50;
+		if(!(turns%rate)) this.spawnEnemy(turns);
+	}
+	spawnEnemy(turns){
+		let y = this.height - (Math.random()*(turns/200))-Enemy.HEIGHT;
+		this.enemies.push(new Enemy(this.width,y));
 	}
 	render(ctx){
 		this.enemies.forEach(enemy=>{

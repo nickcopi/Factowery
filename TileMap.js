@@ -58,7 +58,7 @@ class TileMap{
 	getGrid(x,y){
 		x = Math.floor(x);
 		y = Math.floor(y);
-		if(x < 0 || y < 0 || x > this.numTiles || y > this.numTiles) return null;
+		if(x < 0 || y < 0 || x >= this.numTiles || y >= this.numTiles) return null;
 		return this.grid[y][x];
 	}
 	addBuilding(x,y,building){

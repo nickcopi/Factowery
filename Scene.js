@@ -38,8 +38,8 @@ class Scene{
 			building.use(this.state.turn,this.state.tiles,this.state.wallet,this.state.bulletManager);
 			return true;
 		});
-		this.state.enemyManager.update(this.state.turns);
-		this.state.bulletManager.update(this.state.turns);
+		this.state.enemyManager.update(this.state.turn);
+		this.state.bulletManager.update(this.state.turn);
 		this.state.bulletManager.doCollide(this.state.enemyManager);
 	}
 	render(){
@@ -47,6 +47,8 @@ class Scene{
 		ctx.clearRect(0,0,canvas.width,canvas.height-100);
 		ctx.fillStyle='green';
 		ctx.fillRect(Constants.GRID_SIZE,0,canvas.width-Constants.GRID_SIZE,canvas.height-100);
+		ctx.fillStyle='white';
+		ctx.fillRect(0,0,Constants.GRID_SIZE,Constants.GRID_SIZE);
 		state.tiles.render(ctx);
 		state.enemyManager.render(ctx);
 		state.bulletManager.render(ctx);
