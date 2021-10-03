@@ -76,8 +76,13 @@ class Tube extends Building{
 
 		this.items.push(item);
 	}
-	render(ctx,xOffset,yOffset){
+	render(ctx,xOffset,yOffset,fromMenu){
 		//draw items inside tube
+		if(fromMenu){
+			ctx.fillStyle='white';
+			ctx.fillRect(xOffset,yOffset,this.parentTile.size,this.parentTile.size);
+			this.drawName(ctx,xOffset,yOffset);
+		}
 		const itemSize = this.getItemSize();
 		this.items.forEach(item=>{
 			ctx.fillStyle=Constants.TILE_TYPE_COLOR[item.type];

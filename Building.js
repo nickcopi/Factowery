@@ -29,4 +29,15 @@ class Building{
 			return tile.building;
 		}
 	}
+	drawName(ctx,xOffset,yOffset){
+		const fontSize = Math.floor(this.parentTile.size/2);
+		ctx.font = `${fontSize}px Arial`;
+		let x = xOffset + (this.parentTile.size/2 -ctx.measureText(this.name).width/2);
+		ctx.fillText(this.name,x,yOffset + this.parentTile.size+fontSize*1.2)
+
+
+		let costStr = `${this.cost} scrap`
+		x = xOffset + (this.parentTile.size/2 -ctx.measureText(costStr).width/2);
+		ctx.fillText(costStr,x,yOffset + this.parentTile.size+2*(fontSize*1.2))
+	}
 }

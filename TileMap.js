@@ -78,12 +78,13 @@ class TileMap{
 			building.render(ctx,0,0);
 		});
 	}
-	select(x,y){
+	select(x,y,selection){
 		this.grid.forEach(row=>{
 			row.forEach(tile=>{
 				tile.unselect();
 			});
 		});
 		this.grid[y][x].select();
+		selection.tile = this.grid[y][x];
 	}
 }

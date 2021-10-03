@@ -21,7 +21,8 @@ class Gun extends Building{
 		if(item.type !== TileType.WEAPON) return;
 		this.ammo++;
 	}
-	render(ctx,xOffset,yOffset){
+	render(ctx,xOffset,yOffset,fromMenu){
+		if(fromMenu) this.drawName(ctx,xOffset,yOffset);
 		const x = xOffset + this.parentTile.x*this.parentTile.size + (this.parentTile.size*.15);
 		const y = yOffset + this.parentTile.y*this.parentTile.size + (this.parentTile.size*.15);
 		const width = this.parentTile.size*.7;
