@@ -24,6 +24,15 @@ class BottomBar{
 		this.tileMap.addBuilding(this.selection.tile.x,this.selection.tile.y,new building.__proto__.constructor())
 		this.selection.updated = true;
 	}
+	sellBuilding(){
+		const building = this.selection.tile.building;
+		if(!building) return;
+		//gets cleaned up from state.buildings cache in the main update loop
+		this.selection.tile.building = null;
+		building.scrapped = true;
+		this.wallet.scrap += building.cost;
+		this.selection.updated = true;
+	}
 	renderRight(ctx,xOffset,yOffset,lives){
 		//draw wallet and lives
 		ctx.fillStyle='#C89D7C';
@@ -53,6 +62,7 @@ class BottomBar{
 		if(this.selection.tile){
 			let building = this.selection.tile.building;
 			if(building){
+				this.buttonManager = new ButtonManager(this.canvas);
 				let x,y;
 				let info = '';
 				x = xOffset+30;
@@ -73,6 +83,9 @@ class BottomBar{
 				if(building instanceof Drill) info = `Fuel: ${building.fuel}`;
 				if(building instanceof Gun) info = `Ammo: ${building.ammo}`;
 				ctx.fillText(info,x,y);
+				const sellButton = this.buttonManager.addButton(new Button(xOffset+330,yOffset+25,100,25,'Scrap'));
+				sellButton.addClickEvent(()=>this.sellBuilding());
+				this.buttonManager.render(ctx);
 			} else {
 				this.buttonManager = new ButtonManager(this.canvas);
 				//Display build menu

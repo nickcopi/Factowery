@@ -31,16 +31,18 @@ class Scene{
 	}
 	update(){
 		this.state.turn++;
-		this.state.tiles.buildings.forEach(building=>{
+		this.state.tiles.buildings = this.state.tiles.buildings.filter(building=>{
+			if(building.scrapped) return false;
 			building.use(this.state.turn,this.state.tiles);
+			return true;
 		});
 	}
 	render(){
 		const {canvas, ctx, state} = this;
 		ctx.clearRect(0,0,canvas.width,canvas.height-100);
-		state.tiles.render(ctx);
 		ctx.fillStyle='green';
 		ctx.fillRect(Constants.GRID_SIZE,0,canvas.width-Constants.GRID_SIZE,canvas.height-100);
+		state.tiles.render(ctx);
 		if(this.selection.updated){
 			this.bottomBar.render(ctx,0,canvas.height-100);
 			this.selection.updated = false;
