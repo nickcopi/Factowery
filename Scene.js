@@ -40,6 +40,7 @@ class Scene{
 		});
 		this.state.enemyManager.update(this.state.turns);
 		this.state.bulletManager.update(this.state.turns);
+		this.state.bulletManager.doCollide(this.state.enemyManager);
 	}
 	render(){
 		const {canvas, ctx, state} = this;
