@@ -8,6 +8,11 @@ class BottomBar{
 		this.wallet = wallet;
 		this.dummyBuildings = this.makeDummyBuildings();
 		this.buttonManager = null;
+		this.keyPress = this.handleKey.bind(this);
+		window.addEventListener('keypress',this.keyPress);
+	}
+	destroy(){
+		window.removeEventListener('keypress',this.keyPress);
 	}
 	makeDummyBuildings(){
 		const dummyTile = new Tile(0,0,35);
@@ -18,6 +23,60 @@ class BottomBar{
 			new Energizer(dummyTile),
 			new Scrapper(dummyTile),
 		]
+	}
+	handleKey(e){
+		if(!this.selection.tile) return;
+		switch(e.key){
+			case 'w':
+				this.changeSelection(0,-1);
+				break;
+			case 'd':
+				this.changeSelection(1,0);
+				break;
+			case 's':
+				this.changeSelection(0,1);
+				break;
+			case 'a':
+				this.changeSelection(-1,0);
+				break;
+		}
+		if(!this.selection.tile.building){
+			switch(e.key){
+				case '1':
+					this.buyBuilding(this.dummyBuildings[0]);
+					break;
+				case '2':
+					this.buyBuilding(this.dummyBuildings[1]);
+					break;
+				case '3':
+					this.buyBuilding(this.dummyBuildings[2]);
+					break;
+				case '4':
+					this.buyBuilding(this.dummyBuildings[3]);
+					break;
+				case '5':
+					this.buyBuilding(this.dummyBuildings[4]);
+					break;
+			}
+		} else {
+			switch(e.key){
+				case 'q':
+					this.sellBuilding(this.selection.tile.building);
+					break;
+				case 'r':
+					break;
+				case 'c':
+					this.toggleCCW(this.selection.tile.building);
+					break;
+			}
+
+		}
+	}
+	changeSelection(x,y){
+		const tile = this.tileMap.getGrid(this.selection.tile.x+x,this.selection.tile.y+y);
+		if(!tile) return;
+		this.selection.tile = tile;
+		this.selection.updated = true;
 	}
 	buyBuilding(building){
 		if(this.wallet.scrap < building.cost) return;
