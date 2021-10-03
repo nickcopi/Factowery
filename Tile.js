@@ -10,10 +10,7 @@ class Tile{
 	getColor(){
 		if(this.selected) return 'green';
 		//check type to get color
-		if(this.type === TileType.FUEL) return 'gray';
-		else if(this.type === TileType.WEAPON) return 'red';
-		else if(this.type === TileType.ENERGY) return '#99ccff';
-		else return 'white';
+		return Constants.TILE_TYPE_COLOR[this.type];
 	}
 	select(){
 		this.selected = true;

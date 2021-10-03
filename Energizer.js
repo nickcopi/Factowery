@@ -8,8 +8,12 @@ class Energizer extends Building{
 		this.energy = 0;
 	}
 	use(turn){
-		if(turn%SPEED !== 0) return;
+		if(turn%this.speed !== 0) return;
 		//drill
+	}
+	acceptsType(type){
+		if(type === TileType.ENERGY) return true;
+		return false;
 	}
 	render(ctx,xOffset,yOffset){
 		const x = xOffset + this.parentTile.x*this.parentTile.size + (this.parentTile.size*.15);

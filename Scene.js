@@ -30,6 +30,9 @@ class Scene{
 	}
 	update(){
 		this.state.turn++;
+		this.state.tiles.buildings.forEach(building=>{
+			building.use(this.state.turn,this.state.tiles);
+		});
 	}
 	render(){
 		const {canvas, ctx, state} = this;

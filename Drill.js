@@ -5,11 +5,27 @@ class Drill extends Building{
 	static SPEED = 50;
 	constructor(parentTile){
 		super(parentTile,Drill.NAME,Drill.COST,Drill.DESCRIPTION,Drill.SPEED);
-		this.fuel = 0;
+		this.fuel = 1;
 	}
-	use(turn){
-		if(turn%SPEED !== 0) return;
-		//drill
+	use(turn,tileMap){
+		if(turn%this.speed !== 0) return;
+		if(!this.fuel) return;
+		if(this.parentTile.type === TileType.NONE) return;
+		const item = new Item(this.parentTile.type);
+		const neighbor = this.getNeighbor(tileMap,TileType.FUEL);
+		if(neighbor){
+			neighbor.addItem(item,this);
+			this.fuel--;
+		}
+	}
+	acceptsType(type){
+		if(type === TileType.FUEL) return true;
+		return false;
+	}
+	addItem(item,from){
+		if(item.type === TileType.FUEL){
+			this.fuel++;
+		}
 	}
 	render(ctx,xOffset,yOffset){
 		const x = xOffset + this.parentTile.x*this.parentTile.size + (this.parentTile.size*.15);

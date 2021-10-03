@@ -10,8 +10,16 @@ class Gun extends Building{
 		this.barrelSign = 1;
 	}
 	use(turn){
-		if(turn%SPEED !== 0) return;
+		if(turn%this.speed !== 0) return;
 		//drill
+	}
+	acceptsType(type){
+		if(type === TileType.WEAPON) return true;
+		return false;
+	}
+	addItem(item){
+		if(item.type !== TileType.WEAPON) return;
+		this.ammo++;
 	}
 	render(ctx,xOffset,yOffset){
 		const x = xOffset + this.parentTile.x*this.parentTile.size + (this.parentTile.size*.15);

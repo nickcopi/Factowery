@@ -25,10 +25,18 @@ class TileMap{
 		this.terrainRegion(TileType.WEAPON,numTiles/2,0,numTiles/4,5);
 		this.terrainRegion(TileType.ENERGY,0,numTiles/2,numTiles/4,5);
 		this.addBuilding(24,25, new Energizer(null));
+		this.getGrid(25,25).type = TileType.WEAPON;
 		this.addBuilding(25,25, new Drill(null));
 		this.addBuilding(26,25, new Tube(null));
 		this.addBuilding(27,25, new Tube(null));
-		this.addBuilding(28,25, new Gun(null));
+		this.addBuilding(27,24, new Tube(null));
+
+		this.addBuilding(27,23, new Tube(null));
+		this.addBuilding(26,23, new Tube(null));
+		this.addBuilding(25,23, new Tube(null));
+		this.addBuilding(25,23, new Tube(null));
+		this.addBuilding(25,22, new Gun(null));
+		//this.addBuilding(28,25, new Gun(null));
 	};
 	terrainRegion(type,x,y,maxSize,count){
 		for(let i = 0; i < count; i++){
