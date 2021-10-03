@@ -6,6 +6,7 @@ class GameState{
 			lives:10
 		}
 		this.enemyManager = new EnemyManager(width,height,this.lives);
+		this.bulletManager = new BulletManager(width,height)
 		this.wallet = {
 			scrap:30
 		}

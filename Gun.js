@@ -9,8 +9,11 @@ class Gun extends Building{
 		this.barrelMod = 0;
 		this.barrelSign = 1;
 	}
-	use(turn){
+	use(turn,tileMap,wallet,bulletManager){
 		if(turn%this.speed !== 0) return;
+		if(!this.ammo) return;
+		this.ammo--;
+		bulletManager.addBullet(new Bullet(this.parentTile.x*this.parentTile.size + this.parentTile.size/2,this.parentTile.y*this.parentTile.size + this.parentTile.size/2));
 		//drill
 	}
 	acceptsType(type){

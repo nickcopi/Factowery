@@ -30,14 +30,13 @@ class TileMap{
 		this.addBuilding(25,25, new Drill(null));
 		this.addBuilding(26,25, new Tube(null));
 		this.addBuilding(27,25, new Tube(null));
-		this.addBuilding(27,24, new Tube(null));
+		this.addBuilding(27,26, new Tube(null));
+		this.addBuilding(27,27, new Tube(null));
+		this.addBuilding(27,28, new Tube(null));
+		this.addBuilding(27,29, new Tube(null));
+		this.addBuilding(28,29, new Tube(null));
 
-		this.addBuilding(27,23, new Tube(null));
-		this.addBuilding(26,23, new Tube(null));
-		this.addBuilding(25,23, new Tube(null));
-		this.addBuilding(25,23, new Tube(null));
-		this.addBuilding(25,22, new Gun(null));
-		//this.addBuilding(28,25, new Gun(null));
+		this.addBuilding(29,29, new Gun(null));
 	};
 	terrainRegion(type,x,y,maxSize,count){
 		for(let i = 0; i < count; i++){
@@ -80,12 +79,6 @@ class TileMap{
 		});
 	}
 	select(x,y,selection){
-		/*this.grid.forEach(row=>{
-			row.forEach(tile=>{
-				tile.unselect();
-			});
-		});
-		this.grid[y][x].select();*/
 		selection.tile = this.grid[y][x];
 		selection.updated = true;
 	}

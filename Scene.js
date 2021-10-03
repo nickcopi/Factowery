@@ -35,10 +35,11 @@ class Scene{
 		this.state.turn++;
 		this.state.tiles.buildings = this.state.tiles.buildings.filter(building=>{
 			if(building.scrapped) return false;
-			building.use(this.state.turn,this.state.tiles,this.state.wallet);
+			building.use(this.state.turn,this.state.tiles,this.state.wallet,this.state.bulletManager);
 			return true;
 		});
 		this.state.enemyManager.update(this.state.turns);
+		this.state.bulletManager.update(this.state.turns);
 	}
 	render(){
 		const {canvas, ctx, state} = this;
@@ -47,6 +48,7 @@ class Scene{
 		ctx.fillRect(Constants.GRID_SIZE,0,canvas.width-Constants.GRID_SIZE,canvas.height-100);
 		state.tiles.render(ctx);
 		state.enemyManager.render(ctx);
+		state.bulletManager.render(ctx);
 		if(this.selection.tile){
 			let x = this.selection.tile.x*this.selection.tile.size;
 			let y = this.selection.tile.y*this.selection.tile.size;

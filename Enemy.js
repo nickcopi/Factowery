@@ -6,7 +6,7 @@ class Enemy{
 		this.height = Enemy.HEIGHT;
 		this.x=x;
 		this.y=y;
-		this.speed = 1;
+		this.speed = 0.1;
 		this.health = 1;
 	}
 	move(){
