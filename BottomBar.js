@@ -48,12 +48,22 @@ class BottomBar{
 		ctx.font ='20px Arial'
 		let x,y;
 		x = this.width - ctx.measureText(livesText).width - 10;
-		y = yOffset + 40;
+		y = yOffset + 25;
 		ctx.fillText(livesText,x,y);
 		
 		x = this.width - ctx.measureText(scrapText).width - 10;
-		y = yOffset + 70;
+		y = yOffset + 50;
 		ctx.fillText(scrapText,x,y);
+
+		x = this.width - ctx.measureText(scrapText).width - 10;
+		y = yOffset + 50;
+		ctx.fillText(scrapText,x,y);
+		if(this.selection.tile){
+			const mineableMaterial = `Material: ${Constants.TILE_TYPE_NAME[this.selection.tile.type]}`
+			x = this.width - ctx.measureText(mineableMaterial).width - 10;
+			y = yOffset + 75;
+			ctx.fillText(mineableMaterial,x,y);
+		}
 
 
 	}
