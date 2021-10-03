@@ -43,6 +43,14 @@ class Scene{
 		ctx.fillStyle='green';
 		ctx.fillRect(Constants.GRID_SIZE,0,canvas.width-Constants.GRID_SIZE,canvas.height-100);
 		state.tiles.render(ctx);
+		if(this.selection.tile){
+			let x = this.selection.tile.x*this.selection.tile.size;
+			let y = this.selection.tile.y*this.selection.tile.size;
+			ctx.fillStyle='blue';
+			ctx.globalAlpha = 0.3;
+			ctx.fillRect(x,y,this.selection.tile.size,this.selection.tile.size);
+			ctx.globalAlpha = 1;
+		}
 		if(this.selection.updated){
 			this.bottomBar.render(ctx,0,canvas.height-100);
 			this.selection.updated = false;

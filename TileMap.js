@@ -80,12 +80,12 @@ class TileMap{
 		});
 	}
 	select(x,y,selection){
-		this.grid.forEach(row=>{
+		/*this.grid.forEach(row=>{
 			row.forEach(tile=>{
 				tile.unselect();
 			});
 		});
-		this.grid[y][x].select();
+		this.grid[y][x].select();*/
 		selection.tile = this.grid[y][x];
 		selection.updated = true;
 	}
