@@ -4,8 +4,8 @@ class Scene{
 	constructor(canvas){
 		this.initCanvas(canvas);
 		this.state = new GameState();
-		this.selection = {};
-		this.bottomBar = new BottomBar(1280,100,this.selection);
+		this.selection = {updated:true};
+		this.bottomBar = new BottomBar(1280,100,this.selection,canvas,this.state.tiles,this.state.wallet);
 		this.interval = setInterval(()=>{
 			this.update();
 			this.render();
@@ -37,10 +37,14 @@ class Scene{
 	}
 	render(){
 		const {canvas, ctx, state} = this;
-		ctx.clearRect(0,0,canvas.width,canvas.height);
+		ctx.clearRect(0,0,canvas.width,canvas.height-100);
 		state.tiles.render(ctx);
 		ctx.fillStyle='green';
-		ctx.fillRect(Constants.GRID_SIZE,0,canvas.width-Constants.GRID_SIZE,canvas.height);
-		this.bottomBar.render(ctx,0,canvas.height-100);
+		ctx.fillRect(Constants.GRID_SIZE,0,canvas.width-Constants.GRID_SIZE,canvas.height-100);
+		if(this.selection.updated){
+			this.bottomBar.render(ctx,0,canvas.height-100);
+			this.selection.updated = false;
+		}
+		this.bottomBar.renderRight(ctx,canvas.width-200,canvas.height-100,state.lives);
 	}
 }

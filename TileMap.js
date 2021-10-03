@@ -86,5 +86,6 @@ class TileMap{
 		});
 		this.grid[y][x].select();
 		selection.tile = this.grid[y][x];
+		selection.updated = true;
 	}
 }
