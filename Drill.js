@@ -9,6 +9,7 @@ class Drill extends Building{
 	}
 	use(turn,tileMap){
 		if(turn%this.speed !== 0) return;
+		if(this.parentTile.type === TileType.FUEL) this.fuel = Infinity;
 		if(!this.fuel) return;
 		if(this.parentTile.type === TileType.NONE) return;
 		const item = new Item(this.parentTile.type);

@@ -53,7 +53,6 @@ class Tube extends Building{
 		return this.parentTile.size*0.3
 	}
 	addItem(item,from){
-		console.log(item,from);
 		const itemSize = this.getItemSize();
 		const xDiff = this.parentTile.x - from.parentTile.x;
 		const yDiff = this.parentTile.y - from.parentTile.y;

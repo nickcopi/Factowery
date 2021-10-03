@@ -33,7 +33,7 @@ class Scene{
 		this.state.turn++;
 		this.state.tiles.buildings = this.state.tiles.buildings.filter(building=>{
 			if(building.scrapped) return false;
-			building.use(this.state.turn,this.state.tiles);
+			building.use(this.state.turn,this.state.tiles,this.state.wallet);
 			return true;
 		});
 	}

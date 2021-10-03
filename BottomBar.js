@@ -15,7 +15,8 @@ class BottomBar{
 			new Drill(dummyTile),
 			new Tube(dummyTile),
 			new Gun(dummyTile),
-			new Energizer(dummyTile)
+			new Energizer(dummyTile),
+			new Scrapper(dummyTile),
 		]
 	}
 	buyBuilding(building){
@@ -31,6 +32,10 @@ class BottomBar{
 		this.selection.tile.building = null;
 		building.scrapped = true;
 		this.wallet.scrap += building.cost;
+		this.selection.updated = true;
+	}
+	toggleCCW(building){
+		building.ccw = !building.ccw;
 		this.selection.updated = true;
 	}
 	renderRight(ctx,xOffset,yOffset,lives){
@@ -82,9 +87,14 @@ class BottomBar{
 				if(building instanceof Tube) info = `Items: ${building.items.length}`;
 				if(building instanceof Drill) info = `Fuel: ${building.fuel}`;
 				if(building instanceof Gun) info = `Ammo: ${building.ammo}`;
+				if(building instanceof Scrapper) info = `Scrap: ${building.scrap} Fuel: ${building.fuel}`;
 				ctx.fillText(info,x,y);
-				const sellButton = this.buttonManager.addButton(new Button(xOffset+330,yOffset+25,100,25,'Scrap'));
+				let sellButtonX = xOffset+340;
+				if(building instanceof Scrapper) sellButtonX = xOffset+400;
+				const sellButton = this.buttonManager.addButton(new Button(sellButtonX,yOffset+25,100,25,'Scrap'));
 				sellButton.addClickEvent(()=>this.sellBuilding());
+				const ccwButton = this.buttonManager.addButton(new Button(ctx.measureText(building.description).width+45,yOffset+60,150,25,(building.ccw?'Counter Clockwise':'Clockwise')));
+				ccwButton.addClickEvent(()=>this.toggleCCW(building));
 				this.buttonManager.render(ctx);
 			} else {
 				this.buttonManager = new ButtonManager(this.canvas);
