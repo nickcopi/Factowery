@@ -20,7 +20,7 @@ class Drill extends Building{
 		}
 	}
 	acceptsType(type){
-		if(type === TileType.FUEL) return true;
+		if(type === TileType.FUEL && this.fuel !== Infinity) return true;
 		return false;
 	}
 	addItem(item,from){
