@@ -25,7 +25,7 @@ class TileMap{
 		this.terrainRegion(TileType.FUEL,numTiles/2,0,numTiles/4,5);
 		this.terrainRegion(TileType.ENERGY,0,numTiles/2,numTiles/4,5);
 		this.terrainRegion(TileType.WEAPON,numTiles/2,numTiles/2,numTiles/4,5);
-		this.addBuilding(24,25, new Energizer(null));
+		//this.addBuilding(24,25, new Energizer(null));
 		this.getGrid(25,25).type = TileType.WEAPON;
 		this.addBuilding(25,25, new Drill(null));
 		this.addBuilding(26,25, new Tube(null));

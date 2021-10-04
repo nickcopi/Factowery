@@ -24,7 +24,7 @@ class EnemyManager{
 		if(!(turns%rate)) this.spawnEnemy(turns);
 	}
 	spawnEnemy(turns){
-		let y = this.height - (Math.random()*(turns/200))-Enemy.HEIGHT;
+		let y = this.height - (Math.random()*(turns/400))-Enemy.HEIGHT;
 		this.enemies.push(new Enemy(this.width,y));
 	}
 	render(ctx){
