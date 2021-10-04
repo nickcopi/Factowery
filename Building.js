@@ -7,6 +7,7 @@ class Building{
 		this.speed = speed;
 		this.rotation = 0;
 		this.ccw = false;
+		this.roundRobin = false;
 		this.energized = 0;
 	}
 	setParent(parent){
@@ -35,6 +36,7 @@ class Building{
 			if(!tile || !tile.building) continue;
 			if(typeRestriction && !tile.building.acceptsType(typeRestriction))  continue;
 			if(item && item.lastX === tile.x && item.lastY === tile.y) continue;
+			if(this.roundRobin) this.ccw = !this.ccw;
 			return tile.building;
 		}
 	}

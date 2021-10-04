@@ -97,6 +97,10 @@ class BottomBar{
 		building.ccw = !building.ccw;
 		this.selection.updated = true;
 	}
+	toggleRR(building){
+		building.roundRobin = !building.roundRobin;
+		this.selection.updated = true;
+	}
 	renderRight(ctx,xOffset,yOffset,lives){
 		//draw wallet and lives
 		ctx.fillStyle='#C89D7C';
@@ -163,7 +167,9 @@ class BottomBar{
 				const sellButton = this.buttonManager.addButton(new Button(sellButtonX,yOffset+25,100,25,'Scrap'));
 				sellButton.addClickEvent(()=>this.sellBuilding());
 				const ccwButton = this.buttonManager.addButton(new Button(ctx.measureText(building.description).width+45,yOffset+60,150,25,(building.ccw?'Counter Clockwise':'Clockwise')));
+				const rrButton = this.buttonManager.addButton(new Button(ctx.measureText(building.description).width+200,yOffset+60,150,25,('Round Robin: ' + (building.roundRobin?'On':'Off'))));
 				ccwButton.addClickEvent(()=>this.toggleCCW(building));
+				rrButton.addClickEvent(()=>this.toggleRR(building));
 				this.buttonManager.render(ctx);
 			} else {
 				this.buttonManager = new ButtonManager(this.canvas);

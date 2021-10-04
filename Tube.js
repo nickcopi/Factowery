@@ -21,6 +21,7 @@ class Tube extends Building{
 			if(item.xDir === -1 && item.x < this.parentTile.size/2) checkNeighbors = true;
 			if(item.yDir === 1 && item.y > this.parentTile.size/2) checkNeighbors = true;
 			if(item.yDir === -1 && item.y < this.parentTile.size/2) checkNeighbors = true;
+			if(item.reAngled) checkNeighbors = false;
 			if(item.x > this.parentTile.size) result = this.dumpFromTube(this.parentTile.x+1,this.parentTile.y,tileMap,item);
 			else if(item.x < -itemSize) result = this.dumpFromTube(this.parentTile.x-1,this.parentTile.y,tileMap,item);
 			else if(item.y > this.parentTile.size) result = this.dumpFromTube(this.parentTile.x,this.parentTile.y+1,tileMap,item);
@@ -33,6 +34,7 @@ class Tube extends Building{
 				const yDiff = this.parentTile.y - neighbor.parentTile.y;
 				item.xDir = -xDiff;
 				item.yDir = -yDiff;
+				item.reAngled = true;
 			}
 			return true;
 		});
@@ -60,6 +62,7 @@ class Tube extends Building{
 		item.lastY = from.parentTile.y;
 		item.xDir = xDiff;
 		item.yDir = yDiff;
+		item.reAngled = false;
 		if(xDiff === 0 && !item.x)
 			item.x = this.parentTile.size/2 - itemSize/2
 		if(yDiff === 0 && !item.y)
