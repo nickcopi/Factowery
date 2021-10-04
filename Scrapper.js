@@ -11,7 +11,7 @@ class Scrapper extends Building{
 		this.crusherSign = 1;
 	}
 	use(turn,tileMap,wallet){
-		if(turn%this.speed !== 0) return;
+		if(turn%this.getSpeed(turn) !== 0) return;
 		if(!this.fuel || !this.scrap) return;
 		this.fuel--;
 		this.scrap--;
@@ -30,8 +30,7 @@ class Scrapper extends Building{
 			this.scrap++;
 		}
 	}
-	render(ctx,xOffset,yOffset,fromMenu){
-		if(fromMenu) this.drawName(ctx,xOffset,yOffset);
+	renderSpecific(ctx,xOffset,yOffset,fromMenu){
 		const x = xOffset + this.parentTile.x*this.parentTile.size + (this.parentTile.size*.15);
 		const y = yOffset + this.parentTile.y*this.parentTile.size + (this.parentTile.size*.15);
 		const width = this.parentTile.size*.7;

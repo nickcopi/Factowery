@@ -8,7 +8,7 @@ class Drill extends Building{
 		this.fuel = 1;
 	}
 	use(turn,tileMap){
-		if(turn%this.speed !== 0) return;
+		if(turn%this.getSpeed(turn) !== 0) return;
 		if(this.parentTile.type === TileType.FUEL) this.fuel = Infinity;
 		if(!this.fuel) return;
 		if(this.parentTile.type === TileType.NONE) return;
@@ -28,8 +28,7 @@ class Drill extends Building{
 			this.fuel++;
 		}
 	}
-	render(ctx,xOffset,yOffset,fromMenu){
-		if(fromMenu) this.drawName(ctx,xOffset,yOffset);
+	renderSpecific(ctx,xOffset,yOffset,fromMenu){
 		const x = xOffset + this.parentTile.x*this.parentTile.size + (this.parentTile.size*.15);
 		const y = yOffset + this.parentTile.y*this.parentTile.size + (this.parentTile.size*.15);
 		const width = this.parentTile.size*.7;

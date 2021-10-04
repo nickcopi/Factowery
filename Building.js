@@ -7,9 +7,18 @@ class Building{
 		this.speed = speed;
 		this.rotation = 0;
 		this.ccw = false;
+		this.energized = 0;
 	}
 	setParent(parent){
 		this.parentTile = parent;
+	}
+	getSpeed(turn){
+		let speed = this.speed;
+		if(this.isEnergized(turn)) speed = Math.floor(speed/2);
+		return speed;
+	}
+	isEnergized(turn){
+		return this.energized > turn;
 	}
 	getNeighbor(tileMap,typeRestriction,item){
 		let x = this.parentTile.x;
@@ -39,5 +48,27 @@ class Building{
 		let costStr = `${this.cost} scrap`
 		x = xOffset + (this.parentTile.size/2 -ctx.measureText(costStr).width/2);
 		ctx.fillText(costStr,x,yOffset + this.parentTile.size+2*(fontSize*1.2))
+	}
+	renderEnergized(ctx,xOffset,yOffset,turn){
+		if(this.isEnergized(turn)){
+			ctx.strokeStyle='#ffd700';
+			const shockXMin = xOffset + this.parentTile.x*this.parentTile.size;
+			const shockXMax = this.parentTile.size
+			const shockYMin = yOffset + this.parentTile.y*this.parentTile.size;
+			const shockYMax = this.parentTile.size
+			ctx.beginPath();
+			ctx.moveTo(shockXMin+Math.floor(Math.random()*shockXMax), shockYMin+Math.floor(Math.random()*shockYMax));
+			ctx.lineTo(shockXMin+Math.floor(Math.random()*shockXMax), shockYMin+Math.floor(Math.random()*shockYMax));
+			ctx.lineTo(shockXMin+Math.floor(Math.random()*shockXMax), shockYMin+Math.floor(Math.random()*shockYMax));
+			ctx.lineTo(shockXMin+Math.floor(Math.random()*shockXMax), shockYMin+Math.floor(Math.random()*shockYMax));
+			ctx.stroke();
+		}
+		
+	}
+	render(ctx,xOffset,yOffset,fromMenu,turn){
+		if(fromMenu) this.drawName(ctx,xOffset,yOffset);
+		this.renderSpecific(ctx,xOffset,yOffset,fromMenu);
+		this.renderEnergized(ctx,xOffset,yOffset,turn);
+
 	}
 }

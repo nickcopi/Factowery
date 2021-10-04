@@ -8,7 +8,7 @@ class Tube extends Building{
 		this.items = [];
 	}
 	use(turn,tileMap){
-		if(turn%this.speed !== 0) return;
+		if(turn%this.getSpeed(turn) !== 0) return;
 		//move items
 		const itemSpeed = this.parentTile.size*.1;
 		const itemSize = this.getItemSize();
@@ -75,12 +75,11 @@ class Tube extends Building{
 
 		this.items.push(item);
 	}
-	render(ctx,xOffset,yOffset,fromMenu){
+	renderSpecific(ctx,xOffset,yOffset,fromMenu){
 		//draw items inside tube
 		if(fromMenu){
 			ctx.fillStyle='white';
 			ctx.fillRect(xOffset,yOffset,this.parentTile.size,this.parentTile.size);
-			this.drawName(ctx,xOffset,yOffset);
 		}
 		const itemSize = this.getItemSize();
 		this.items.forEach(item=>{

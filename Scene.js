@@ -49,7 +49,7 @@ class Scene{
 		ctx.fillRect(Constants.GRID_SIZE,0,canvas.width-Constants.GRID_SIZE,canvas.height-100);
 		ctx.fillStyle='white';
 		ctx.fillRect(0,0,Constants.GRID_SIZE,Constants.GRID_SIZE);
-		state.tiles.render(ctx);
+		state.tiles.render(ctx,state.turn);
 		state.enemyManager.render(ctx);
 		state.bulletManager.render(ctx);
 		if(this.selection.tile){

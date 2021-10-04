@@ -10,7 +10,7 @@ class Gun extends Building{
 		this.barrelSign = 1;
 	}
 	use(turn,tileMap,wallet,bulletManager){
-		if(turn%this.speed !== 0) return;
+		if(turn%this.getSpeed(turn) !== 0) return;
 		if(!this.ammo) return;
 		this.ammo--;
 		bulletManager.addBullet(new Bullet(this.parentTile.x*this.parentTile.size + this.parentTile.size/2,this.parentTile.y*this.parentTile.size + this.parentTile.size/2));
@@ -24,8 +24,7 @@ class Gun extends Building{
 		if(item.type !== TileType.WEAPON) return;
 		this.ammo++;
 	}
-	render(ctx,xOffset,yOffset,fromMenu){
-		if(fromMenu) this.drawName(ctx,xOffset,yOffset);
+	renderSpecific(ctx,xOffset,yOffset,fromMenu){
 		const x = xOffset + this.parentTile.x*this.parentTile.size + (this.parentTile.size*.15);
 		const y = yOffset + this.parentTile.y*this.parentTile.size + (this.parentTile.size*.15);
 		const width = this.parentTile.size*.7;

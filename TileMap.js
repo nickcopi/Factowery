@@ -68,14 +68,14 @@ class TileMap{
 		building.setParent(tile);
 		this.buildings.push(building);
 	}
-	render(ctx){
+	render(ctx,turn){
 		this.grid.forEach(row=>{
 			row.forEach(tile=>{
 				tile.render(ctx,0,0);
 			});
 		});
 		this.buildings.forEach(building=>{
-			building.render(ctx,0,0);
+			building.render(ctx,0,0,false,turn);
 		});
 	}
 	select(x,y,selection){

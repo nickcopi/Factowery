@@ -1,22 +1,29 @@
 class Energizer extends Building{
 	static NAME = 'Energizer';
 	static COST = 5;
-	static DESCRIPTION = 'Energizes a random building on the screen and makes it process faster.'
+	static DESCRIPTION = 'Energizes a random building on the screen for 5 seconds to make it 2x as fast.'
 	static SPEED = 16;
 	constructor(parentTile){
 		super(parentTile,Energizer.NAME,Energizer.COST,Energizer.DESCRIPTION,Energizer.SPEED);
 		this.energy = 0;
 	}
-	use(turn){
-		if(turn%this.speed !== 0) return;
-		//drill
+	use(turn,tileMap){
+		if(turn%this.getSpeed(turn) !== 0) return;
+		if(!this.energy) return;
+		const targets = tileMap.buildings.filter(building=>!building.isEnergized(turn));
+		if(!targets.length) return;
+		targets[Math.floor(Math.random()*targets.length)].energized = turn + 80;
+		this.energy--;
 	}
 	acceptsType(type){
 		if(type === TileType.ENERGY) return true;
 		return false;
 	}
-	render(ctx,xOffset,yOffset,fromMenu){
-		if(fromMenu) this.drawName(ctx,xOffset,yOffset);
+	addItem(item){
+		if(item.type !== TileType.ENERGY) return;
+		this.energy++;
+	}
+	renderSpecific(ctx,xOffset,yOffset,fromMenu){
 		const x = xOffset + this.parentTile.x*this.parentTile.size + (this.parentTile.size*.15);
 		const y = yOffset + this.parentTile.y*this.parentTile.size + (this.parentTile.size*.15);
 		const width = this.parentTile.size*.7;
