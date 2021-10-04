@@ -10,6 +10,10 @@ class EnemyManager{
 			enemy.move();
 			if(enemy.x < Constants.GRID_SIZE){
 				this.lives.lives--;
+				if(this.lives < 0){
+					alert('You ran out of lives! You lose!');
+					window.reload();
+				}
 				return false;
 			}
 			return true;
