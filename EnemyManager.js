@@ -12,7 +12,7 @@ class EnemyManager{
 				this.lives.lives--;
 				if(this.lives.lives <= 0){
 					alert('You ran out of lives! You lose!');
-					window.reload();
+					window.location.reload();
 				}
 				return false;
 			}
