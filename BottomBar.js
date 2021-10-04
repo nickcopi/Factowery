@@ -64,6 +64,7 @@ class BottomBar{
 					this.sellBuilding(this.selection.tile.building);
 					break;
 				case 'r':
+					this.toggleRR(this.selection.tile.building);
 					break;
 				case 'c':
 					this.toggleCCW(this.selection.tile.building);
