@@ -1,0 +1,12 @@
+{
+	"name":"Factowery",
+	"tags":["Game"],
+	"description":"Simple yet interesting factory automation and tower defense game. Made in 12 hours for Ludum Dare 49.",
+	"embed":{
+		"width":1300,
+		"height":720,
+		"file":"index.html"
+	},
+	"date":"October 2021"
+}
+
